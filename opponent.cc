@@ -13,8 +13,17 @@ void Opponent::Draw(graphics::Image& screen) {
   }
 }
 
-void Opponent::Move(graphics::Image& screen) {
-  SetY(GetY() + 1);
+void Opponent::Move(const graphics::Image& screen) {
+  if (going_right_ && GetX() + GetWidth() >= screen.GetWidth()) {
+    going_right_ = false;
+  } else if (!going_right_ && GetX() <= 0) {
+    going_right_ = true;
+  }
+  int offset = going_right_ ? 1 : -1;
+
+  SetX(GetX() + offset * 5);
+  SetY(GetY() + 2);
+
   if (IsOutOfBounds(screen)) {
     SetIsActive(false);
   }
@@ -31,7 +40,7 @@ void OpponentProjectile::Draw(graphics::Image& screen) {
   }
 }
 
-void OpponentProjectile::Move(graphics::Image& screen) {
+void OpponentProjectile::Move(const graphics::Image& screen) {
   SetY(GetY() + 1);
   if (IsOutOfBounds(screen)) {
     SetIsActive(false);

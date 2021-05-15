@@ -13,28 +13,24 @@ void Game::Init() {
 }
 
 void Game::CreateOpponents() {
-  Opponent op;
-  Opponent op2;
-  op.SetX(250);
-  op.SetY(200);
-  op_.push_back(op);
-  op2.SetX(450);
-  op2.SetY(200);
-  op_.push_back(op2);
+  for (int i = 0; i < 5; i++) {
+    Opponent op(100 * i, 20);
+    op_.push_back(op);
+  }
 }
 
 void Game::CreateOpponentProjectiles() {
-  OpponentProjectile opp;
-  opp.SetX(250);
-  opp.SetY(250);
-  opp_.push_back(opp);
+  for (int i = 0; i < 5; i++) {
+    OpponentProjectile opp(100 * i, 100);
+    opp_.push_back(opp);
+  }
 }
 
 void Game::CreatePlayerProjectiles() {
-  PlayerProjectile pp;
-  pp.SetX(400);
-  pp.SetY(250);
-  pp_.push_back(pp);
+  for (int i = 0; i < 5; i++) {
+    PlayerProjectile pp(100 * i, 450);
+    pp_.push_back(pp);
+  }
 }
 
 void Game::MoveGameElements() {
@@ -57,13 +53,15 @@ void Game::MoveGameElements() {
 
 void Game::FilterIntersections() {
   for (int i = 0; i < op_.size(); i++) {
-    if (op_[i].GetIsActive() && pl_.GetIsActive() && pl_.IntersectsWith(&op_[i])) {
+    if (op_[i].GetIsActive() && pl_.GetIsActive() &&
+        pl_.IntersectsWith(&op_[i])) {
       // op_.IntersectsWith(op_[i]);
       op_[i].SetIsActive(false);
       pl_.SetIsActive(false);
     } else {
       for (int j = 0; j < pp_.size(); j++) {
-        if (op_[i].GetIsActive() && pp_[j].GetIsActive() && pp_[j].IntersectsWith(&op_[i])) {
+        if (op_[i].GetIsActive() && pp_[j].GetIsActive() &&
+            pp_[j].IntersectsWith(&op_[i])) {
           op_[i].SetIsActive(false);
           pp_[j].SetIsActive(false);
         }
@@ -71,7 +69,8 @@ void Game::FilterIntersections() {
     }
   }
   for (int i = 0; i < opp_.size(); i++) {
-    if (opp_[i].GetIsActive() && pl_.GetIsActive() && pl_.IntersectsWith(&opp_[i])) {
+    if (opp_[i].GetIsActive() && pl_.GetIsActive() &&
+        pl_.IntersectsWith(&opp_[i])) {
       opp_[i].SetIsActive(false);
       pl_.SetIsActive(false);
     }
@@ -88,8 +87,8 @@ void Game::UpdateScreen() {
     }
   }
   for (int i = 0; i < opp_.size(); i++) {
-    if (op_[i].GetIsActive()) {
-      op_[i].Draw(gscreen);
+    if (opp_[i].GetIsActive()) {
+      opp_[i].Draw(gscreen);
     }
   }
   for (int i = 0; i < pp_.size(); i++) {

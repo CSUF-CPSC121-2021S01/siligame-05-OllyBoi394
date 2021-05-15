@@ -9,8 +9,6 @@
 class Game : public graphics::AnimationEventListener,
              public graphics::MouseEventListener {
  private:
-  int width_;
-  int height_;
   graphics::Image gscreen;
   std::vector<Opponent> op_;
   std::vector<OpponentProjectile> opp_;
@@ -19,8 +17,7 @@ class Game : public graphics::AnimationEventListener,
 
  public:
   Game() : Game(800, 600) {}
-  Game(int width, int height)
-      : width_(width), height_(height), gscreen(width, height) {}
+  Game(int width, int height) : gscreen(width, height) {}
 
   graphics::Image& GetGameScreen() { return gscreen; }
   std::vector<Opponent>& GetOpponents() { return op_; }

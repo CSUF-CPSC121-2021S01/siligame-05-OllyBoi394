@@ -17,7 +17,7 @@ class GameElement {
 
  public:
   GameElement() : GameElement(0, 0, 50, 50) {}
-  GameElement(const int& x, const int& y, const int& width, const int& height)
+  GameElement(int x, int y, int width, int height)
       : x_(x), y_(y), width_(width), height_(height) {}
 
   int GetX() const { return x_; }
@@ -33,7 +33,7 @@ class GameElement {
   bool GetIsActive() { return is_active_; }
   void SetIsActive(bool is_active) { is_active_ = is_active; }
 
-  virtual void Move(graphics::Image& screen) = 0;
+  virtual void Move(const graphics::Image& screen) = 0;
 
   bool IntersectsWith(GameElement* juego);
 

@@ -6,21 +6,24 @@
 #define OPPONENT_H
 
 class Opponent : public GameElement {
+ private:
+  bool going_right_ = true;
+
  public:
   Opponent() : Opponent(0, 0) {}
-  Opponent(const int& x, const int& y) : GameElement(x, y, 50, 50) {}
+  Opponent(int x, int y) : GameElement(x, y, 50, 50) {}
 
-  void Draw(graphics::Image& screen);
-  void Move(graphics::Image& screen);
+  void Draw(graphics::Image& screen) override;
+  void Move(const graphics::Image& screen) override;
 };
 
 class OpponentProjectile : public GameElement {
  public:
   OpponentProjectile() : OpponentProjectile(0, 0) {}
-  OpponentProjectile(const int& x, const int& y) : GameElement(x, y, 5, 5) {}
+  OpponentProjectile(int x, int y) : GameElement(x, y, 5, 5) {}
 
-  void Draw(graphics::Image& screen);
-  void Move(graphics::Image& screen);
+  void Draw(graphics::Image& screen) override;
+  void Move(const graphics::Image& screen) override;
 };
 
 #endif
