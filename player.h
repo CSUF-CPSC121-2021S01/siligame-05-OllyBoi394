@@ -1,0 +1,27 @@
+#include <iostream>
+#include "cpputils/graphics/image.h"
+#include "game_element.h"
+#include "opponent.h"
+
+#ifndef PLAYER_H
+#define PLAYER_H
+
+class Player : public GameElement {
+ public:
+  Player() : Player(0, 0) {}
+  Player(const int& x, const int& y) : GameElement(x, y, 50, 50) {}
+
+  void Draw(graphics::Image& screen);
+  void Move(graphics::Image& screen);
+};
+
+class PlayerProjectile : public GameElement {
+ public:
+  PlayerProjectile() : PlayerProjectile(0, 0) {}
+  PlayerProjectile(const int& x, const int& y) : GameElement(x, y, 5, 5) {}
+
+  void Draw(graphics::Image& screen);
+  void Move(graphics::Image& screen);
+};
+
+#endif
