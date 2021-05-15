@@ -46,3 +46,12 @@ void OpponentProjectile::Move(const graphics::Image& screen) {
     SetIsActive(false);
   }
 }
+
+std::unique_ptr<class OpponentProjectile> Opponent::LaunchProjectile() {
+  if (count % 30 == 0) {
+    count++;
+    return std::make_unique<OpponentProjectile>(GetX() + 25, GetY());
+  }
+  count++;
+  return nullptr;
+}

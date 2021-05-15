@@ -7,6 +7,7 @@
 
 class Opponent : public GameElement {
  private:
+  int count = 0;
   bool going_right_ = true;
 
  public:
@@ -15,6 +16,8 @@ class Opponent : public GameElement {
 
   void Draw(graphics::Image& screen) override;
   void Move(const graphics::Image& screen) override;
+
+  std::unique_ptr<class OpponentProjectile> LaunchProjectile();
 };
 
 class OpponentProjectile : public GameElement {
